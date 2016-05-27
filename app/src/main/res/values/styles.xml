@@ -1,0 +1,81 @@
+<resources>
+
+    <declare-styleable name="CirclePageIndicator">
+        <attr name="indicator_spacing" format="dimension" />
+    </declare-styleable>
+
+    <style name="ProgressBarStyle" parent="@android:style/Widget.ProgressBar" />
+
+    <style name="AppTheme" parent="Base.AppTheme">
+
+    </style>
+
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/md_grey_800</item>
+        <item name="colorPrimaryDark">@color/md_grey_900</item>
+        <item name="colorAccent">@color/md_red_800</item>
+        <item name="colorControlNormal">@color/divider</item>
+        <item name="colorControlActivated">@color/md_red_800</item>
+        <item name="colorControlHighlight">@color/md_red_800</item>
+        <item name="android:textColorHint">@color/md_red_800</item>
+
+        <item name="colorButtonNormal">@color/md_red_800</item>
+
+
+    </style>
+    <style name="AppTheme2" parent="Base.AppTheme">
+        <item name="colorPrimary">@color/md_white_1000</item>
+        <item name="colorPrimaryDark">@color/md_white_1000</item>
+        <item name="colorAccent">@color/md_white_1000</item>
+        <item name="colorControlNormal">@color/md_white_1000</item>
+        <item name="colorControlActivated">@color/md_white_1000</item>
+        <item name="colorControlHighlight">@color/md_grey_800</item>
+        <item name="android:textColorHint">@color/md_white_1000</item>
+        <item name="colorButtonNormal">@color/md_white_1000</item>
+
+    </style>
+
+    <style name="spinner_style"  parent="AppTheme">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:dropDownWidth">400dp</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:dropDownHeight">70dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:dropDownSelector">@color/primary_dark</item>
+    </style>
+    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/primary_dark</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+
+    </style>
+
+    <style name="ToolbarTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <style name="NavigationViewTheme" parent="AppTheme">
+        <item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Body2</item>
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="WelcomeHeadingAppearance" parent="@android:style/TextAppearance.Large">
+        <item name="android:textSize">@dimen/welcome_heading</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="WelcomeContentAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/welcome_content</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+
+</resources>

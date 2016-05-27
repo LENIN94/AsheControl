@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Ashe Control</string>
+
+    <string name="welcom_head_01">Realiza tus Reportes </string>
+    <string name="welcom_content_01">Se mas productivo.</string>
+    <string name="welcom_head_02">Usa tu Android </string>
+    <string name="welcom_content_02">Llena tu reporte rapido sin necesidad de entrar a tu computadora</string>
+    <string name="welcom_head_03">Facil</string>
+    <string name="welcom_content_03">Muy Fácil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_wait">Por favor, espera...</string>
+</resources>
