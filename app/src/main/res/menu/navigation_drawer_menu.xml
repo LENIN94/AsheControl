@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_principal"
+            android:checked="true"
+            android:icon="@drawable/ic_home_black_48dp"
+            android:title="Inicio" />
+        <item
+
+            android:id="@+id/item_login"
+            android:icon="@drawable/ic_home_black_48dp"
+            android:title="Reportes" />
+
+        <item
+
+            android:id="@+id/item_micuenta"
+            android:icon="@drawable/ic_home_black_48dp"
+            android:title="Reportes Asignados" />
+
+        <item
+            android:id="@+id/item_navigation_drawer_ubicacion"
+            android:icon="@drawable/ic_home_black_48dp"
+            android:title="Aqui Estoy" />
+
+
+    </group>
+
+    <item android:title="Otros">
+        <menu>
+            <item
+                android:id="@+id/item_navigation_drawer_settings"
+                android:icon="@drawable/ic_home_black_48dp"
+                android:title="Ajustes" />
+            <item
+                android:id="@+id/item_navigation_drawer_help_and_feedback"
+                android:icon="@drawable/ic_home_black_48dp"
+                android:title="Acerca de..." />
+
+
+            <item
+                android:id="@+id/item_exit"
+                android:icon="@drawable/ic_home_black_48dp"
+                android:title="Cerrar Sesion" />
+        </menu>
+    </item>
+
+</menu>

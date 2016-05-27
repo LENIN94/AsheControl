@@ -1,0 +1,37 @@
+<resources>>
+
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="colorPrimary">@color/md_grey_800</item>
+        <item name="colorPrimaryDark">@color/md_grey_900</item>
+        <item name="colorAccent">@color/md_red_800</item>
+        <item name="colorControlNormal">@color/md_red_800</item>
+        <item name="colorControlActivated">@color/md_red_800</item>
+        <item name="colorControlHighlight">@color/md_red_800</item>
+        <item name="android:textColorHint">@color/md_red_800</item>
+
+        <item name="colorButtonNormal">@color/md_red_800</item>
+
+        <item name="android:navigationBarColor">@color/md_grey_900</item>
+
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+    </style>
+
+
+    <style name="AppTheme2" parent="Base.AppTheme">
+        <item name="colorPrimary">@color/md_white_1000</item>
+        <item name="colorPrimaryDark">@color/md_white_1000</item>
+        <item name="colorAccent">@color/md_white_1000</item>
+        <item name="colorControlNormal">@color/md_white_1000</item>
+        <item name="colorControlActivated">@color/md_white_1000</item>
+        <item name="colorControlHighlight">@color/md_red_800</item>
+        <item name="android:textColorHint">@color/md_white_1000</item>
+        <item name="colorButtonNormal">@color/md_white_1000</item>
+
+    </style>
+
+</resources>
