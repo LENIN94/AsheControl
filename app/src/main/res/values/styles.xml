@@ -6,7 +6,7 @@
 
     <style name="ProgressBarStyle" parent="@android:style/Widget.ProgressBar" />
 
-    <style name="AppTheme" parent="Base.AppTheme">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
     </style>
 

@@ -114,8 +114,8 @@ public class ActivityLogin extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-              //  login();
-                startActivity(new Intent(ActivityLogin.this,ActivityMenu.class));
+               login();
+
             }
         });
 
@@ -137,92 +137,80 @@ public class ActivityLogin extends AppCompatActivity {
         if (!validate()) {
             onLoginFailed();
             return;
+        }else
+        {
+            progressDialog = new ProgressDialog(ActivityLogin.this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Conectando...");
+            progressDialog.show();
+
+
+            final String name = edtUsuario.getText().toString();
+            final String pass = edtPass.getText().toString();
+            StringRequest strReq = new StringRequest(Request.Method.POST,
+                    EndPoints.LOGIN, new Response.Listener<String>() {
+
+                @Override
+                public void onResponse(String response) {
+                    Log.e(TAG, "response: " + response);
+
+                    try {
+                        JSONObject obj = new JSONObject(response);
+
+                        if (obj.getBoolean("error") == false) {
+                            // user successfully logged in
+                            JSONObject userObj = obj.getJSONObject("user");
+                            User user = new User(userObj.getString("ID"),userObj.getString("NOMBRE"),userObj.getString("USUARIO"),
+                                    userObj.getString("PASS"),userObj.getString("IMAGEN"));
+
+                            // storing user in shared preferences
+                            MyApplication.getInstance().getPrefManager().storeUser(user);
+                            progressDialog.dismiss();//ocultamos progess dialog.
+                            // start main activity
+
+                            startActivity(new Intent(getApplicationContext(), ActivityMenu.class));
+
+                            finish();
+
+                        } else {
+                            // login error - simply toast the message
+                            Toast.makeText(getApplicationContext(), "Ocurrio un error"+ obj.getString("message") , Toast.LENGTH_LONG).show();
+                        }
+
+                    } catch (JSONException e) {
+                        Log.e(TAG, "json parsing error: " + e.getMessage());
+                        Toast.makeText(getApplicationContext(), "Json parse error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    NetworkResponse networkResponse = error.networkResponse;
+                    Log.e(TAG, "Volley error: " + error.getMessage() + ", code: " + networkResponse);
+                    Toast.makeText(getApplicationContext(), "Volley error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("usuario", name);
+                    params.put("pass", pass);
+
+                    Log.e(TAG, "params: " + params.toString());
+                    return params;
+                }
+            };
+
+            //Adding request to request queue
+            MyApplication.getInstance().addToRequestQueue(strReq);
         }
 
-        /*btnLogin.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Validando...");
-        progressDialog.show();
-
-        String email = edtUsuario.getText().toString();
-        String password = edtPass.getText().toString();
-
-        // TODO: Implement your own authentication logic here.
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 1000);*/
-
-        final String name = edtUsuario.getText().toString();
-        final String pass = edtPass.getText().toString();
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                EndPoints.LOGIN, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.e(TAG, "response: " + response);
-
-                try {
-                    JSONObject obj = new JSONObject(response);
-
-                    if (obj.getBoolean("error") == false) {
-                        // user successfully logged in
-                        JSONObject userObj = obj.getJSONObject("user");
-                        User user = new User(userObj.getString("NOMBRE"),
-                                userObj.getString("ID"), null);
-
-                        // storing user in shared preferences
-                        MyApplication.getInstance().getPrefManager().storeUser(user);
-
-                        // start main activity
-                        startActivity(new Intent(getApplicationContext(), ActivityMenu.class));
-                        finish();
-
-                    } else {
-                        // login error - simply toast the message
-                        Toast.makeText(getApplicationContext(), "Ocurrio un error", Toast.LENGTH_LONG).show();
-                    }
-
-                } catch (JSONException e) {
-                    Log.e(TAG, "json parsing error: " + e.getMessage());
-                    Toast.makeText(getApplicationContext(), "Json parse error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                NetworkResponse networkResponse = error.networkResponse;
-                Log.e(TAG, "Volley error: " + error.getMessage() + ", code: " + networkResponse);
-                Toast.makeText(getApplicationContext(), "Volley error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("usuario", name);
-                params.put("pass", pass);
-                params.put("proceso", "login");
-                Log.e(TAG, "params: " + params.toString());
-                return params;
-            }
-        };
-
-        //Adding request to request queue
-        MyApplication.getInstance().addToRequestQueue(strReq);
-
-
     }
+
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {

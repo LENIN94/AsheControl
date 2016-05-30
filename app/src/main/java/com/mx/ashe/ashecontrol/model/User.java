@@ -6,42 +6,60 @@ import java.io.Serializable;
  * Created by OmarLenin on 03/03/2016.
  */
 public class User implements Serializable {
-    String id, name, UltimoFolio;
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public String getUsuario() {
+        return Usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        Usuario = usuario;
+    }
+
+    public String getPass() {
+        return Pass;
+    }
+
+    public void setPass(String pass) {
+        Pass = pass;
+    }
+
+    public String getImagen() {
+        return Imagen;
+    }
+
+    public void setImagen(String imagen) {
+        Imagen = imagen;
+    }
+
+    String ID, Nombre, Usuario, Pass,Imagen;
 
     public User() {
     }
 
-    public User(String id, String name, String Folio) {
-        this.id = id;
-        this.name = name;
-
-        UltimoFolio=Folio;
+    public User(String ID, String Nombre, String Usuario, String Pass, String Imagen) {
+        this.ID = ID;
+        this.Nombre = Nombre;
+        this.Usuario = Usuario;
+        this.Pass = Pass;
+        this.Imagen = Imagen;
 
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUltimoFolio() {
-        return UltimoFolio;
-    }
-
-    public void setUltimoFolio(String Folio) {
-        this.UltimoFolio = Folio;
-    }
 
 
 }

@@ -27,13 +27,14 @@ public class MyPreferenceManager {
     int PRIVATE_MODE = 0;
 
     // Sharedpref file name
-    private static final String PREF_NAME = "androidhive_gcm";
+    private static final String PREF_NAME = "ASHEControl";
 
     // All Shared Preferences Keys
-    private static final String KEY_USER_ID = "user_id";
-    private static final String KEY_USER_NAME = "user_name";
-    private static final String KEY_USER_EMAIL = "user_email";
-    private static final String KEY_NOTIFICATIONS = "notifications";
+    private static final String KEY_USER_ID = "ID";
+    private static final String KEY_USER_NAME = "Usuario";
+    private static final String KEY_NAME = "Nombre";
+    private static final String KEY_PASS = "Pass";
+    private static final String KEY_IMG = "Imagen";
 
     // Constructor
     public MyPreferenceManager(Context context) {
@@ -42,34 +43,33 @@ public class MyPreferenceManager {
         editor = pref.edit();
     }
     public void storeUser(User user) {
-        editor.putString(KEY_USER_ID, user.getId());
-        editor.putString(KEY_USER_NAME, user.getName());
+        editor.putString(KEY_USER_ID, user.getID());
+        editor.putString(KEY_NAME, user.getNombre());
+        editor.putString(KEY_PASS, user.getPass());
+        editor.putString(KEY_USER_NAME, user.getUsuario());
+        editor.putString(KEY_IMG, user.getImagen());
 
         editor.commit();
 
-        Log.e(TAG, "User is stored in shared preferences. " + user.getName() + ", " );
+        Log.e(TAG, "Usuario Almacenado: " + user.getNombre() + ", " );
     }
 
-    public void storeFolio(User user){
 
-    }
 
     public User getUser() {
         if (pref.getString(KEY_USER_ID, null) != null) {
-            String id, name;
-            id = pref.getString(KEY_USER_ID, null);
-            name = pref.getString(KEY_USER_NAME, null);
+            String ID, Nombre,Usuario, Pass,Imagen;
+            ID = pref.getString(KEY_USER_ID, null);
+            Nombre = pref.getString(KEY_NAME, null);
+            Usuario = pref.getString(KEY_USER_NAME, null);
+            Pass = pref.getString(KEY_PASS, null);
+            Imagen = pref.getString(KEY_IMG, null);
 
 
-            User user = new User(id, name,null);
+            User user = new User(ID,Nombre,Usuario,Pass,Imagen);
             return user;
         }
         return null;
-    }
-
-
-    public String getNotifications() {
-        return pref.getString(KEY_NOTIFICATIONS, null);
     }
 
     public void clear() {

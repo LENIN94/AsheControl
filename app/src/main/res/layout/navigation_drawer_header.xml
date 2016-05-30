@@ -30,7 +30,7 @@
         android:paddingRight="16dp">
 
         <TextView
-            android:id="@+id/tv_nombre"
+            android:id="@+id/tvEmpresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -40,7 +40,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/tv_email"
+            android:id="@+id/tvNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

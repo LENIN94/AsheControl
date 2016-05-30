@@ -8,7 +8,7 @@ import android.util.Log;
 public class ActivitySplash extends AppCompatActivity {
 
     private static String TAG = ActivitySplash.class.getName();
-    private static long SLEEP_TIME = 2;
+    private static long SLEEP_TIME = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

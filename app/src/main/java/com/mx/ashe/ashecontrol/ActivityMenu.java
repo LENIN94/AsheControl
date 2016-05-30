@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.mx.ashe.ashecontrol.Fragments.FragmentRegAsistencia;
 import com.mx.ashe.ashecontrol.Fragments.HomeFragment;
 import com.mx.ashe.ashecontrol.app.Config;
 import com.mx.ashe.ashecontrol.app.EndPoints;
@@ -50,9 +51,9 @@ public class ActivityMenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-      /*  if (MyApplication.getInstance().getPrefManager().getUser() == null) {
+        if (MyApplication.getInstance().getPrefManager().getUser() == null) {
             launchLoginActivity();
-        }*/
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -68,7 +69,9 @@ public class ActivityMenu extends AppCompatActivity {
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
-        txtusuario = (TextView) findViewById(R.id.tv_nombre);
+        txtusuario = (TextView) findViewById(R.id.tvNombre);
+      // txtusuario.setText(MyApplication.getInstance().getPrefManager().getUser().getNombre());
+        Log.e(getPackageName().toString(),MyApplication.getInstance().getPrefManager().getUser().getNombre());
         img = (ImageView) findViewById(R.id.img_user);
         //First start (Inbox Fragment)
 
@@ -178,8 +181,9 @@ public class ActivityMenu extends AppCompatActivity {
             case 1:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-             //   ReportesFragment rpt = new ReportesFragment();
-              //  fragmentTransaction.replace(R.id.fragment, rpt);
+              //  FragmentRegAsistencia rpt = new FragmentRegAsistencia();
+                startActivity(new Intent(ActivityMenu.this, FragmentRegAsistencia.class));
+               // fragmentTransaction.replace(R.id.fragment, rpt);
                 fragmentTransaction.commit();
                 break;
 
