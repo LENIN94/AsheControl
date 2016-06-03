@@ -10,19 +10,16 @@
         <item
 
             android:id="@+id/item_login"
-            android:icon="@drawable/ic_home_black_48dp"
-            android:title="Reportes" />
+            android:icon="@drawable/ic_map_black_48dp"
+            android:title="Registrar Visita" />
 
         <item
 
             android:id="@+id/item_micuenta"
-            android:icon="@drawable/ic_home_black_48dp"
-            android:title="Reportes Asignados" />
+            android:icon="@drawable/ic_history_black_48dp"
+            android:title="Visitas Realizadas" />
 
-        <item
-            android:id="@+id/item_navigation_drawer_ubicacion"
-            android:icon="@drawable/ic_home_black_48dp"
-            android:title="Aqui Estoy" />
+
 
 
     </group>
@@ -30,18 +27,14 @@
     <item android:title="Otros">
         <menu>
             <item
-                android:id="@+id/item_navigation_drawer_settings"
-                android:icon="@drawable/ic_home_black_48dp"
-                android:title="Ajustes" />
-            <item
                 android:id="@+id/item_navigation_drawer_help_and_feedback"
-                android:icon="@drawable/ic_home_black_48dp"
+                android:icon="@drawable/ic_help_black_48dp"
                 android:title="Acerca de..." />
 
 
             <item
                 android:id="@+id/item_exit"
-                android:icon="@drawable/ic_home_black_48dp"
+                android:icon="@drawable/ic_exit_to_app_black_48dp"
                 android:title="Cerrar Sesion" />
         </menu>
     </item>

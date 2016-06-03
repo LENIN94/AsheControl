@@ -1,7 +1,7 @@
 <resources>>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/md_grey_800</item>
+        <item name="colorPrimary">@color/md_grey_900</item>
         <item name="colorPrimaryDark">@color/md_grey_900</item>
         <item name="colorAccent">@color/md_red_800</item>
         <item name="colorControlNormal">@color/md_red_800</item>

@@ -145,11 +145,7 @@ public class ActivityMenu extends AppCompatActivity {
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
 
-                            case R.id.item_navigation_drawer_ubicacion:
-                                menuItem.setChecked(true);
-                                setFragment(3);
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                return true;
+
 
                             case R.id.item_navigation_drawer_help_and_feedback:
                                 menuItem.setChecked(true);
@@ -183,6 +179,7 @@ public class ActivityMenu extends AppCompatActivity {
                 fragmentTransaction = fragmentManager.beginTransaction();
               //  FragmentRegAsistencia rpt = new FragmentRegAsistencia();
                 startActivity(new Intent(ActivityMenu.this, FragmentRegAsistencia.class));
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                // fragmentTransaction.replace(R.id.fragment, rpt);
                 fragmentTransaction.commit();
                 break;

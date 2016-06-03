@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.mx.ashe.ashecontrol.model.LastLocation;
+import com.mx.ashe.ashecontrol.model.LocationNotWorking;
 import com.mx.ashe.ashecontrol.model.User;
 
 
@@ -54,6 +56,46 @@ public class MyPreferenceManager {
         Log.e(TAG, "Usuario Almacenado: " + user.getNombre() + ", " );
     }
 
+    public void storeLocation(LastLocation location){
+        editor.putString("ID", location.getID());
+        editor.putString("Lat", location.getLat());
+        editor.putString("Long", location.getLong());
+        editor.commit();
+        Log.e(TAG, "Localizacion Almacenada: " + location.getLat() + ", " );
+    }
+    public void storeLocationNotWorking(LocationNotWorking location){
+        editor.putBoolean("CONCLUIDO", location.isConcluido());
+        editor.putString("Lat2", location.getLat());
+        editor.putString("Long2", location.getLong());
+        editor.commit();
+        Log.e(TAG, "Localizacion fuera de visita: " + location.isConcluido() + ", " );
+    }
+
+
+    public LastLocation getLocation(){
+        if (pref.getString("ID", null) != null) {
+            String ID, Lat,Long;
+            ID = pref.getString("ID", null);
+            Lat = pref.getString("Lat", null);
+            Long = pref.getString("Long", null);
+            LastLocation lastLocation = new LastLocation(ID,Lat,Long);
+            return lastLocation;
+        }
+        return null;
+    }
+    public LocationNotWorking getLocationNotWorking(){
+        if (pref.getString("ID", null) != null) {
+            boolean Concluido;
+            String Lat;
+            String Long;
+            Concluido = pref.getBoolean("CONCLUIDO", false);
+            Lat = pref.getString("Lat2", null);
+            Long = pref.getString("Long2", null);
+            LocationNotWorking notWorking = new LocationNotWorking(Lat,Long,Concluido);
+            return notWorking;
+        }
+        return null;
+    }
 
 
     public User getUser() {

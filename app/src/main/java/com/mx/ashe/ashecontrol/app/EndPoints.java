@@ -6,7 +6,7 @@ package com.mx.ashe.ashecontrol.app;
 public class EndPoints {
     // localhost url -
 
-    public static final String BASE_URL = "http://192.168.1.100/Rastreo/wsRest/";
+    public static final String BASE_URL = "http://192.168.1.119/Rastreo/wsRest/";
     public static final String LOGIN = BASE_URL + "wsLogin";
     public static final String REGVISITA = BASE_URL +"wsRegVisita";
     public static final String GETCLIENT = BASE_URL +"wsGetClientes";
