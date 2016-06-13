@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
-            android:src="@mipmap/image2_a_01"
+            android:src="@drawable/log"
             android:layout_marginTop="48dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
@@ -30,7 +30,7 @@
             android:layout_height="80dp"
             android:layout_marginBottom="8dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/image2_b_02"
+            android:src="@drawable/location"
             android:layout_gravity="left|bottom"
             android:layout_marginLeft="56dp" />
         <ImageView 
@@ -40,29 +40,31 @@
             android:layout_marginTop="80dp"
             android:layout_marginRight="56dp"
             android:scaleType="centerInside"
-            android:src="@mipmap/image2_b_02"
+            android:src="@drawable/ic_find"
             android:layout_gravity="right|top"/>
     </FrameLayout>
 
-    <TextView
+    <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
         android:id="@+id/heading"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/images"
         android:layout_alignLeft="@id/images"
         android:layout_marginTop="24dp"
+        android:textSize="30dp"
         android:layout_marginLeft="@dimen/welcome_text_margin"
         android:layout_marginRight="@dimen/welcome_text_margin"
         android:text="@string/welcom_head_01"
         android:textAppearance="@style/WelcomeHeadingAppearance" />
 
-    <TextView
+    <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
         android:id="@+id/content"
         android:text="@string/welcom_content_01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/images"
         android:layout_below="@+id/heading"
+        android:textSize="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="@dimen/welcome_text_margin"
         android:layout_marginRight="@dimen/welcome_text_margin"

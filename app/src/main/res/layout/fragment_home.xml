@@ -4,25 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
     <ImageView
+        android:id="@+id/imglog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-android:id="@+id/imglog"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/logo"/>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/log" />
+    <ImageView
         android:layout_below="@id/imglog"
-        android:gravity="center_horizontal"
-        android:id="@+id/tvU"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:text=""/>
+        android:id="@+id/notnet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
 </RelativeLayout>
 
 

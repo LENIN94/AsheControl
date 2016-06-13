@@ -9,13 +9,13 @@
             android:title="Inicio" />
         <item
 
-            android:id="@+id/item_login"
+            android:id="@+id/item_regvisita"
             android:icon="@drawable/ic_map_black_48dp"
             android:title="Registrar Visita" />
 
         <item
 
-            android:id="@+id/item_micuenta"
+            android:id="@+id/item_visitas"
             android:icon="@drawable/ic_history_black_48dp"
             android:title="Visitas Realizadas" />
 
@@ -24,10 +24,12 @@
 
     </group>
 
-    <item android:title="Otros">
-        <menu>
+    <item android:title="Otros" android:checkableBehavior="single">
+
+        <menu android:checkableBehavior="single">
+            <group android:checkableBehavior="single">
             <item
-                android:id="@+id/item_navigation_drawer_help_and_feedback"
+                android:id="@+id/item_about"
                 android:icon="@drawable/ic_help_black_48dp"
                 android:title="Acerca de..." />
 
@@ -36,7 +38,9 @@
                 android:id="@+id/item_exit"
                 android:icon="@drawable/ic_exit_to_app_black_48dp"
                 android:title="Cerrar Sesion" />
+            </group>
         </menu>
+
     </item>
 
 </menu>

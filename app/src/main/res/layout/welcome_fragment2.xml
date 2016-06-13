@@ -17,19 +17,19 @@
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:src="@mipmap/image2_c_01"
-            android:layout_gravity="center"/>
+            android:scaleType="fitStart"
+            android:src="@drawable/location"
+            android:layout_gravity="left|center"/>
         <ImageView 
-            android:layout_width="320dp"
-            android:layout_height="320dp"
-            android:scaleType="centerInside"
-            android:src="@mipmap/welcome_03"
-            android:layout_gravity="right|center_vertical"/>
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/ic_client"
+            android:layout_gravity="right"
+            android:scaleType="center" />
 
     </FrameLayout>
 
-    <TextView
+    <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
         android:id="@id/heading"
         android:text="@string/welcom_head_02"
         android:layout_width="fill_parent"
@@ -37,11 +37,12 @@
         android:layout_below="@+id/images"
         android:layout_alignLeft="@id/images"
         android:layout_marginTop="24dp"
+        android:textSize="30dp"
         android:layout_marginLeft="@dimen/welcome_text_margin"
         android:layout_marginRight="@dimen/welcome_text_margin"
         android:textAppearance="@style/WelcomeHeadingAppearance" />
 
-    <TextView
+    <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
         android:id="@id/content"
         android:text="@string/welcom_content_02"
         android:layout_width="fill_parent"
@@ -49,6 +50,7 @@
         android:layout_alignLeft="@id/images"
         android:layout_below="@+id/heading"
         android:layout_marginTop="8dp"
+        android:textSize="20dp"
         android:layout_marginLeft="@dimen/welcome_text_margin"
         android:layout_marginRight="@dimen/welcome_text_margin"
         android:minHeight="@dimen/welcome_content_min_height"

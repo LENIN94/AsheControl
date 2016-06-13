@@ -1,8 +1,8 @@
 package com.mx.ashe.ashecontrol;
 
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -12,30 +12,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.mx.ashe.ashecontrol.Fragments.FragmentHistorialVisitas;
 import com.mx.ashe.ashecontrol.Fragments.FragmentRegAsistencia;
 import com.mx.ashe.ashecontrol.Fragments.HomeFragment;
-import com.mx.ashe.ashecontrol.app.Config;
-import com.mx.ashe.ashecontrol.app.EndPoints;
+import com.mx.ashe.ashecontrol.UI.CustomTypefaceSpan;
 import com.mx.ashe.ashecontrol.app.MyApplication;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class ActivityMenu extends AppCompatActivity {
@@ -61,32 +55,55 @@ public class ActivityMenu extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        TextView tv = new TextView(getApplicationContext());
+        tv.setText("Visitas");
+        tv.setTextSize(25);
+        tv.setTypeface(Typeface.createFromAsset(getAssets(),"CaviarDreams.ttf"));
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        // Finally, set the newly created TextView as ActionBar custom view
+        actionBar.setCustomView(tv);
+        // Update the action bar title with the TypefaceSpan instance
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
-
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        Menu m = navigationView.getMenu();
+        for (int i=0;i<m.size();i++) {
+            MenuItem mi = m.getItem(i);
+
+            //for aapplying a font to subMenu ...
+            SubMenu subMenu = mi.getSubMenu();
+            if (subMenu!=null && subMenu.size() >0 ) {
+                for (int j=0; j <subMenu.size();j++) {
+                    MenuItem subMenuItem = subMenu.getItem(j);
+                    applyFontToMenuItem(subMenuItem);
+                }
+            }
+            //the method we have create in activity
+            applyFontToMenuItem(mi);
+        }
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
+
         }
         setupNavigationDrawerContent(navigationView);
         txtusuario = (TextView) findViewById(R.id.tvNombre);
-      // txtusuario.setText(MyApplication.getInstance().getPrefManager().getUser().getNombre());
-        Log.e(getPackageName().toString(),MyApplication.getInstance().getPrefManager().getUser().getNombre());
+        // txtusuario.setText(MyApplication.getInstance().getPrefManager().getUser().getNombre());
+        Log.e(getPackageName().toString(), MyApplication.getInstance().getPrefManager().getUser().getNombre());
         img = (ImageView) findViewById(R.id.img_user);
         //First start (Inbox Fragment)
-
-
-
-
         if (checkPlayServices()) {
 
-           // fetchChatRooms();
+            // fetchChatRooms();
         }
-
-
         setFragment(0);
     }
-
+    private void applyFontToMenuItem(MenuItem mi) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "CaviarDreams.ttf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
+    }
 
     private boolean checkPlayServices() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
@@ -104,10 +121,6 @@ public class ActivityMenu extends AppCompatActivity {
         }
         return true;
     }
-
-
-
-
 
 
     @Override
@@ -133,21 +146,20 @@ public class ActivityMenu extends AppCompatActivity {
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
 
-                            case R.id.item_login:
+                            case R.id.item_regvisita:
                                 menuItem.setChecked(true);
                                 setFragment(1);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
 
-                            case R.id.item_micuenta:
+                            case R.id.item_visitas:
                                 menuItem.setChecked(true);
                                 setFragment(2);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
 
 
-
-                            case R.id.item_navigation_drawer_help_and_feedback:
+                            case R.id.item_about:
                                 menuItem.setChecked(true);
                                 Toast.makeText(ActivityMenu.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -177,26 +189,26 @@ public class ActivityMenu extends AppCompatActivity {
             case 1:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-              //  FragmentRegAsistencia rpt = new FragmentRegAsistencia();
+                //  FragmentRegAsistencia rpt = new FragmentRegAsistencia();
                 startActivity(new Intent(ActivityMenu.this, FragmentRegAsistencia.class));
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-               // fragmentTransaction.replace(R.id.fragment, rpt);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                // fragmentTransaction.replace(R.id.fragment, rpt);
                 fragmentTransaction.commit();
                 break;
 
             case 2:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-             //   ReporteByTecFragment tec = new ReporteByTecFragment();
-              //  fragmentTransaction.replace(R.id.fragment, tec);
+                FragmentHistorialVisitas tec = new FragmentHistorialVisitas();
+                fragmentTransaction.replace(R.id.fragment, tec);
                 fragmentTransaction.commit();
                 break;
 
             case 3:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-              //  MiPosicionFragment ub = new MiPosicionFragment();
-              //  fragmentTransaction.replace(R.id.fragment, ub);
+                //  MiPosicionFragment ub = new MiPosicionFragment();
+                //  fragmentTransaction.replace(R.id.fragment, ub);
                 fragmentTransaction.commit();
                 break;
 

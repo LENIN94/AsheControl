@@ -21,9 +21,7 @@ import com.nineoldandroids.view.ViewHelper;
 
 
 public class ProductTourActivity extends AppCompatActivity {
-
     static final int NUM_PAGES = 4;
-
     ViewPager pager;
     PagerAdapter pagerAdapter;
     LinearLayout circles;
@@ -31,13 +29,11 @@ public class ProductTourActivity extends AppCompatActivity {
     Button done;
     ImageButton next;
     boolean isOpaque = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Window window = getWindow();
         window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
         setContentView(R.layout.activity_tutorial);
         skip = Button.class.cast(findViewById(R.id.skip));
         skip.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +42,6 @@ public class ProductTourActivity extends AppCompatActivity {
                 endTutorial();
             }
         });
-
         next = ImageButton.class.cast(findViewById(R.id.next));
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +49,6 @@ public class ProductTourActivity extends AppCompatActivity {
                 pager.setCurrentItem(pager.getCurrentItem() + 1, true);
             }
         });
-
         done = Button.class.cast(findViewById(R.id.done));
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +56,6 @@ public class ProductTourActivity extends AppCompatActivity {
                 endTutorial();
             }
         });
-
         pager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);

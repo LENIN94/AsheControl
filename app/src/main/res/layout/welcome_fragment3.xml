@@ -19,8 +19,8 @@
             android:id="@+id/a007"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:src="@mipmap/image1_b_01"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_list"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="16dp"/>
         <ImageView 
@@ -29,23 +29,25 @@
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
             android:layout_marginTop="24dp"
-            android:src="@mipmap/image3_c_01"
+
+            android:src="@drawable/ic_hist"
             android:layout_gravity="right|top"/>
     </FrameLayout>
 
-    <TextView
+    <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
         android:id="@+id/heading"
         android:text="@string/welcom_head_03"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/images"
         android:layout_alignLeft="@id/images"
+        android:textSize="30dp"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="@dimen/welcome_text_margin"
         android:layout_marginRight="@dimen/welcome_text_margin"
         android:textAppearance="@style/WelcomeHeadingAppearance" />
 
-    <TextView
+    <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
         android:id="@+id/content"
         android:text="@string/welcom_content_03"
         android:layout_width="fill_parent"
@@ -53,6 +55,7 @@
         android:layout_alignLeft="@id/images"
         android:layout_below="@+id/heading"
         android:layout_marginTop="8dp"
+        android:textSize="20dp"
         android:layout_marginLeft="@dimen/welcome_text_margin"
         android:layout_marginRight="@dimen/welcome_text_margin"
         android:minHeight="@dimen/welcome_content_min_height"

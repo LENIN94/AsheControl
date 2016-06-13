@@ -178,8 +178,9 @@ public class ActivityLogin extends AppCompatActivity {
                             // login error - simply toast the message
                             Toast.makeText(getApplicationContext(), "Ocurrio un error"+ obj.getString("message") , Toast.LENGTH_LONG).show();
                         }
-
+                        progressDialog.dismiss();//ocultamos progess dialog.
                     } catch (JSONException e) {
+                        progressDialog.dismiss();//ocultamos progess dialog.
                         Log.e(TAG, "json parsing error: " + e.getMessage());
                         Toast.makeText(getApplicationContext(), "Json parse error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -204,13 +205,10 @@ public class ActivityLogin extends AppCompatActivity {
                     return params;
                 }
             };
-
             //Adding request to request queue
             MyApplication.getInstance().addToRequestQueue(strReq);
         }
-
     }
-
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {
