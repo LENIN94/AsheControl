@@ -1,5 +1,8 @@
 package com.mx.ashe.ashecontrol.Fragments;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -48,7 +51,7 @@ public class FragmentHistorialVisitas extends Fragment {
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
-
+    ProgressDialog progressDialog;
     List<Visita> itemVisita;
     ColoredSnackbar ColoredSnackBar;
     @Override
@@ -63,9 +66,14 @@ public class FragmentHistorialVisitas extends Fragment {
         // Usar un administrador para LinearLayout
         lManager = new LinearLayoutManager(getActivity());
         recycler.setLayoutManager(lManager);
+        progressDialog = new ProgressDialog(getActivity(),
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Descargando datos...");
+        progressDialog.show();
+
         LoadData();
-
-
         recycler.addOnItemTouchListener(
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
@@ -76,8 +84,6 @@ public class FragmentHistorialVisitas extends Fragment {
                 })
         );
         return view;
-
-
     }
 
     private void LoadData() {
@@ -103,12 +109,13 @@ public class FragmentHistorialVisitas extends Fragment {
                         }
                         Log.e("Mensaje", json_arr.toString());
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Ocurrio un error", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "No se encontraron registros", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     Log.e("", "json parsing error: " + e.getMessage());
                     Toast.makeText(getActivity().getApplicationContext(), "Json parse error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+                progressDialog.dismiss();//ocultamos progess dialog.
             }
         }, new Response.ErrorListener() {
             @Override

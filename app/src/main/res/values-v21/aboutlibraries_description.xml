@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aboutLibraries_description_name">Monitoreo ASHE</string>
+    <string name="aboutLibraries_description_showIcon">true</string>
+    <string name="aboutLibraries_description_showVersion">true</string>
+    <string name="aboutLibraries_description_text">
+        <![CDATA[ La aplicación fue creada para la monitorización de empleados de la empresa ASHE S.A de C.V .<br />
+        <b>Esta aplicación hace uso de recursos de código libre los cuales se describen a continuación.</b>
+        ]]>
+    </string>
+
+
+
+    <string name="aboutLibraries_description_special3_name">Changelog</string>
+    <string name="aboutLibraries_description_special3_text">
+        <![CDATA[
+        <i>Version 1.1.0</i><br />
+        - ShowCase View<br />
+        - Servicio de localización<br />
+        <br />
+        <i>Versión 1.0.0</i><br />
+        - Registro de Visitas <br />
+        - Historial de visitas <br />
+        - A cerca de... <br />
+        - navigation Drawer <br />
+        - Tour App <br />
+        - ]]>
+    </string>
+</resources>

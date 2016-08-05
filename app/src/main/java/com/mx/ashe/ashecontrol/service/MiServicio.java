@@ -149,7 +149,7 @@ public class MiServicio extends Service {
                                 // cronometro.reiniciar();
 
                             } else {
-                                Toast.makeText(getBaseContext(), "tiempo menor ", Toast.LENGTH_SHORT).show();
+                             //   Toast.makeText(getBaseContext(), "tiempo menor ", Toast.LENGTH_SHORT).show();
 
                                 //   String horap=formateador.format(sumarRestarHorasFecha(horaactual,30));
                             }

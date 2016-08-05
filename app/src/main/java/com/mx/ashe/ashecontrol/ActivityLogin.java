@@ -54,17 +54,16 @@ public class ActivityLogin extends AppCompatActivity {
 
     };
     private static final int REQUEST_SIGNUP = 0;
+
+
     @InjectView(R.id.edtUsuario)
     EditText edtUsuario;
     @InjectView(R.id.edtPass)
     EditText edtPass;
     @InjectView(R.id.btn_login)
     Button btnLogin;
-    ProgressDialog progressDialog;
-    private String MensajeError = "La Conexion ha Fallado";
 
-    SharedPreferences SharedPrefs;
-    CheckBox chGuardaS;
+    ProgressDialog progressDialog;
     private static final int INITIAL_REQUEST = 1337;
     private String TAG = ActivityLogin.class.getSimpleName();
 
@@ -79,7 +78,8 @@ public class ActivityLogin extends AppCompatActivity {
         checkShowTutorial();
 
         setContentView(R.layout.activity_login);
-        btn = (Button) findViewById(R.id.btn_login);
+        ButterKnife.inject(this);
+
 
 
 
@@ -98,14 +98,6 @@ public class ActivityLogin extends AppCompatActivity {
                 Log.e("eerr", e.toString());
             }
         }
-
-
-        ButterKnife.inject(this);
-        edtUsuario = (EditText) findViewById(R.id.edtUsuario);
-        edtPass = (EditText) findViewById(R.id.edtPass);
-
-
-
 
 
         btnLogin = (Button) findViewById(R.id.btn_login);
@@ -184,6 +176,8 @@ public class ActivityLogin extends AppCompatActivity {
                         Log.e(TAG, "json parsing error: " + e.getMessage());
                         Toast.makeText(getApplicationContext(), "Json parse error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+
+                    progressDialog.dismiss();//ocultamos progess dialog.
                 }
             }, new Response.ErrorListener() {
 
@@ -192,6 +186,7 @@ public class ActivityLogin extends AppCompatActivity {
                     NetworkResponse networkResponse = error.networkResponse;
                     Log.e(TAG, "Volley error: " + error.getMessage() + ", code: " + networkResponse);
                     Toast.makeText(getApplicationContext(), "Volley error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();//ocultamos progess dialog.
                 }
             }) {
 

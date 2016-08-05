@@ -19,30 +19,47 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.mx.ashe.ashecontrol.Fragments.FragmentAcercaDe;
 import com.mx.ashe.ashecontrol.Fragments.FragmentHistorialVisitas;
 import com.mx.ashe.ashecontrol.Fragments.FragmentRegAsistencia;
 import com.mx.ashe.ashecontrol.Fragments.HomeFragment;
 import com.mx.ashe.ashecontrol.UI.CustomTypefaceSpan;
 import com.mx.ashe.ashecontrol.app.MyApplication;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import co.mobiwise.materialintro.animation.MaterialIntroListener;
+import co.mobiwise.materialintro.prefs.PreferencesManager;
+import co.mobiwise.materialintro.shape.Focus;
+import co.mobiwise.materialintro.shape.FocusGravity;
+import co.mobiwise.materialintro.view.MaterialIntroView;
 
-public class ActivityMenu extends AppCompatActivity {
 
+public class ActivityMenu extends AppCompatActivity implements MaterialIntroListener {
+
+    @InjectView(R.id.navigation_drawer_layout)
     DrawerLayout drawerLayout;
+    @InjectView(R.id.toolbar)
     Toolbar toolbar;
+
     ActionBar actionBar;
-    public TextView txtusuario;
-    ImageView img;
-    private BroadcastReceiver mRegistrationBroadcastReceiver;
     private String TAG = ActivityMenu.class.getSimpleName();
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String INTRO_CARD = "material_intro";
 
+
+
+
+
+    @InjectView(R.id.navigation_view)
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (MyApplication.getInstance().getPrefManager().getUser() == null) {
@@ -50,31 +67,32 @@ public class ActivityMenu extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.inject(this);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //  actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
         TextView tv = new TextView(getApplicationContext());
-        tv.setText("Visitas");
+        tv.setText("ASHE Monitor");
         tv.setTextSize(25);
-        tv.setTypeface(Typeface.createFromAsset(getAssets(),"CaviarDreams.ttf"));
+        tv.setTypeface(Typeface.createFromAsset(getAssets(), "CaviarDreams.ttf"));
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         // Finally, set the newly created TextView as ActionBar custom view
         actionBar.setCustomView(tv);
         // Update the action bar title with the TypefaceSpan instance
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        Menu m = navigationView.getMenu();
-        for (int i=0;i<m.size();i++) {
-            MenuItem mi = m.getItem(i);
 
+
+        Menu m = navigationView.getMenu();
+
+        new PreferencesManager(getApplicationContext()).resetAll();
+        for (int i = 0; i < m.size(); i++) {
+            MenuItem mi = m.getItem(i);
             //for aapplying a font to subMenu ...
             SubMenu subMenu = mi.getSubMenu();
-            if (subMenu!=null && subMenu.size() >0 ) {
-                for (int j=0; j <subMenu.size();j++) {
+            if (subMenu != null && subMenu.size() > 0) {
+                for (int j = 0; j < subMenu.size(); j++) {
                     MenuItem subMenuItem = subMenu.getItem(j);
                     applyFontToMenuItem(subMenuItem);
                 }
@@ -84,24 +102,35 @@ public class ActivityMenu extends AppCompatActivity {
         }
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
-
         }
         setupNavigationDrawerContent(navigationView);
-        txtusuario = (TextView) findViewById(R.id.tvNombre);
-        // txtusuario.setText(MyApplication.getInstance().getPrefManager().getUser().getNombre());
-        Log.e(getPackageName().toString(), MyApplication.getInstance().getPrefManager().getUser().getNombre());
-        img = (ImageView) findViewById(R.id.img_user);
-        //First start (Inbox Fragment)
-        if (checkPlayServices()) {
 
-            // fetchChatRooms();
-        }
+        // txtusuario.setText(MyApplication.getInstance().getPrefManager().getUser().getNombre());
         setFragment(0);
+        showIntro(toolbar, INTRO_CARD, "Accede al menu tocando\n las barras o deslizando\n hacia la derecha!");
+
+
     }
+
+    private void showIntro(View view, String usageId, String text){
+        new MaterialIntroView.Builder(ActivityMenu.this)
+                .enableDotAnimation(true)
+                //.enableIcon(false)
+                .setFocusGravity(FocusGravity.LEFT)
+                .setFocusType(Focus.MINIMUM)
+                .setDelayMillis(200)
+                .enableFadeAnimation(true)
+                .performClick(true)
+                .setInfoText(text)
+                .setTarget(view)
+                .setUsageId(usageId) //THIS SHOULD BE UNIQUE ID
+                .show();
+    }
+
     private void applyFontToMenuItem(MenuItem mi) {
         Typeface font = Typeface.createFromAsset(getAssets(), "CaviarDreams.ttf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
-        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
 
@@ -122,7 +151,6 @@ public class ActivityMenu extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -138,33 +166,28 @@ public class ActivityMenu extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-
                         switch (menuItem.getItemId()) {
+
                             case R.id.item_principal:
                                 menuItem.setChecked(true);
                                 setFragment(0);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-
                             case R.id.item_regvisita:
                                 menuItem.setChecked(true);
                                 setFragment(1);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-
                             case R.id.item_visitas:
                                 menuItem.setChecked(true);
                                 setFragment(2);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-
-
                             case R.id.item_about:
                                 menuItem.setChecked(true);
-                                Toast.makeText(ActivityMenu.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                setFragment(3);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-
                             case R.id.item_exit:
                                 MyApplication.getInstance().logout();
                                 return true;
@@ -207,12 +230,16 @@ public class ActivityMenu extends AppCompatActivity {
             case 3:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                //  MiPosicionFragment ub = new MiPosicionFragment();
-                //  fragmentTransaction.replace(R.id.fragment, ub);
+                FragmentAcercaDe ub = new FragmentAcercaDe();
+                fragmentTransaction.replace(R.id.fragment, ub);
                 fragmentTransaction.commit();
                 break;
-
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void launchLoginActivity() {
@@ -223,4 +250,8 @@ public class ActivityMenu extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onUserClicked(String s) {
+
+    }
 }
