@@ -110,13 +110,15 @@ public class MiServicio extends Service {
         @Override
         public void onLocationChanged(Location location) {
             Log.e(TAG, "onLocationChanged: " + location);
-            if (validaLocalizacion()) {
+            if (validaLocalizacion() && MyApplication.getInstance().getPrefManager().getLocation().getLat() != null) {
                 mLastLocation.set(location);
                 double currentLatitude = location.getLatitude();
                 double currentLongitude = location.getLongitude();
                 Lat = currentLatitude;
                 Long = currentLongitude;
                 GLOC = location;
+
+
                 Log.i("Lat guard", MyApplication.getInstance().getPrefManager().getLocation().getLat());
                 Log.i("Long guard", MyApplication.getInstance().getPrefManager().getLocation().getLong());
                 Log.i("Concluido", String.valueOf(MyApplication.getInstance().getPrefManager().getLocationNotWorking().isConcluido()));
@@ -149,7 +151,7 @@ public class MiServicio extends Service {
                                 // cronometro.reiniciar();
 
                             } else {
-                             //   Toast.makeText(getBaseContext(), "tiempo menor ", Toast.LENGTH_SHORT).show();
+                                //   Toast.makeText(getBaseContext(), "tiempo menor ", Toast.LENGTH_SHORT).show();
 
                                 //   String horap=formateador.format(sumarRestarHorasFecha(horaactual,30));
                             }
@@ -268,6 +270,16 @@ public class MiServicio extends Service {
             for (int i = 0; i < mLocationListeners.length; i++) {
                 try {
 
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
                     mLocationManager.removeUpdates(mLocationListeners[i]);
                 } catch (Exception ex) {
                     Log.i(TAG, "fail to remove location listners, ignore", ex);

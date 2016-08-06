@@ -129,6 +129,8 @@ public class FragmentHistorialVisitas extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("ID", MyApplication.getInstance().getPrefManager().getUser().getID());
+
+                Log.d("Params", String.valueOf(params));
                 return params;
             }
         };
