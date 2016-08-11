@@ -11,4 +11,5 @@ public class EndPoints {
     public static final String REGVISITA = BASE_URL +"wsRegVisita";
     public static final String GETCLIENT = BASE_URL +"wsGetClientes";
     public static final String GETVISITAS = BASE_URL +"wsGetVisitasByVendedor";
+    public static final String FINVISITA = BASE_URL +"wsFinVisita";
 }

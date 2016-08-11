@@ -1,51 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
+    android:layout_height="@dimen/nav_header_height"
     android:background="@color/md_red_800"
-    android:gravity="bottom"
+    android:gravity="top|bottom"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:src="@drawable/log"
+        android:scaleType="fitStart" />
+
+    <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Ashe Monitor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-    <ImageView
-        android:id="@+id/img_user"
-        android:layout_width="250dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="@dimen/navigation_drawer_header_margin"
-        android:scaleType="fitStart"
-        android:src="@drawable/log" />
+    <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
+        android:id="@+id/tvuserlog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menú" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_gravity="left|bottom"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-
-        <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
-            android:id="@+id/tvEmpresa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:text="Grupo ASHE S.A. de C.V"
-            android:textSize="18dp" />
-
-        <com.mx.ashe.ashecontrol.UI.TextViewPersonalizado
-            android:id="@+id/tvNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:text="User" />
-
-    </LinearLayout>
-
-</FrameLayout>
- 
+</LinearLayout>

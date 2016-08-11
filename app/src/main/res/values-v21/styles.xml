@@ -34,5 +34,9 @@
 
     </style>
 
+    <style name="ButtonP" parent="AppTheme">
+        <item name="android:shadowColor">@color/md_red_900</item>
+        <item name="android:textColor">@color/md_white_1000</item>
 
+    </style>
 </resources>

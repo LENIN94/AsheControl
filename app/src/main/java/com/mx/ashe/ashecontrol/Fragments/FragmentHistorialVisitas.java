@@ -1,25 +1,16 @@
 package com.mx.ashe.ashecontrol.Fragments;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
@@ -30,7 +21,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.mx.ashe.ashecontrol.ActivityMenu;
 import com.mx.ashe.ashecontrol.R;
 import com.mx.ashe.ashecontrol.UI.ColoredSnackbar;
-import com.mx.ashe.ashecontrol.UI.TextViewPersonalizado;
 import com.mx.ashe.ashecontrol.adapter.RecyclerItemClickListener;
 import com.mx.ashe.ashecontrol.adapter.adapterVisita;
 import com.mx.ashe.ashecontrol.app.EndPoints;
@@ -121,8 +111,30 @@ public class FragmentHistorialVisitas extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 NetworkResponse networkResponse = error.networkResponse;
-                Log.e("", "Volley error: " + error.getMessage() + ", code: " + networkResponse);
-                Toast.makeText(getActivity().getApplicationContext(), "Volley error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("", "Volley error: " + error.getMessage() + ", code: " + networkResponse   );
+
+                if (error.networkResponse==null){
+
+                    new android.support.v7.app.AlertDialog.Builder(getContext(), R.style.AppTheme_Dark_Dialog)
+                            .setTitle("Ashe Monitor")
+                            .setMessage("Porfavor verifica tu conexión a internet")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    dialog.dismiss();
+
+                                }
+                            })
+                            .setIcon(R.mipmap.ic_launcher)
+                            .show();
+                }
+
+
+                Toast.makeText(getActivity().getApplicationContext(), "Volley error: " + error.getMessage()   , Toast.LENGTH_SHORT).show();
+
+
+
+                progressDialog.dismiss();//ocultamos progess dialog.
             }
         }) {
             @Override

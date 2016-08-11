@@ -3,15 +3,10 @@ package com.mx.ashe.ashecontrol;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.os.Vibrator;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,10 +15,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -34,12 +27,12 @@ import com.mx.ashe.ashecontrol.app.EndPoints;
 import com.mx.ashe.ashecontrol.app.MyApplication;
 import com.mx.ashe.ashecontrol.helper.PrefConstants;
 import com.mx.ashe.ashecontrol.helper.SAppUtil;
+import com.mx.ashe.ashecontrol.model.UltimoCliente;
 import com.mx.ashe.ashecontrol.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -256,7 +249,7 @@ public class ActivityLogin extends AppCompatActivity {
             edtUsuario.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+        if (password.isEmpty() || password.length() < 4 ) {
             edtPass.setError("Entre 4 y 10 caracteres");
             valid = false;
         } else {
@@ -271,6 +264,9 @@ public class ActivityLogin extends AppCompatActivity {
         int oldVersionCode = PrefConstants.getAppPrefInt(this, "version_code");
         int currentVersionCode = SAppUtil.getAppVersionCode(this);
         if (currentVersionCode > oldVersionCode) {
+            UltimoCliente locnot=new UltimoCliente("",0,"","",true, Float.parseFloat("0.23234"),Float.parseFloat("0.23234"));
+            MyApplication.getInstance().getPrefManager().storeClienteU(locnot);
+
             startActivity(new Intent(ActivityLogin.this, ProductTourActivity.class));
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             PrefConstants.putAppPrefInt(this, "version_code", currentVersionCode);

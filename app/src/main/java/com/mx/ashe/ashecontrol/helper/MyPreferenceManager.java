@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.mx.ashe.ashecontrol.model.LastLocation;
 import com.mx.ashe.ashecontrol.model.LocationNotWorking;
+import com.mx.ashe.ashecontrol.model.UltimoCliente;
 import com.mx.ashe.ashecontrol.model.User;
 
 
@@ -57,7 +58,7 @@ public class MyPreferenceManager {
     }
 
     public void storeLocation(LastLocation location){
-        editor.putString("ID", location.getID());
+        editor.putString("IDloc", location.getID());
         editor.putString("Lat", location.getLat());
         editor.putString("Long", location.getLong());
         editor.commit();
@@ -69,6 +70,38 @@ public class MyPreferenceManager {
         editor.putString("Long2", location.getLong());
         editor.commit();
         Log.e(TAG, "Localizacion fuera de visita: " + location.isConcluido() + ", " );
+    }
+
+    public void storeClienteU(UltimoCliente location){
+        editor.putBoolean("fin", location.isFinalizado());
+        editor.putString("cliente", location.getNombre());
+        editor.putString("dir", location.getDireccion());
+        editor.putString("hora", location.getHora());
+        editor.putInt("idcliente",location.idcliente);
+        editor.putFloat("ulat", location.Lat);
+        editor.putFloat("ulong",location.Long);
+        editor.commit();
+        Log.e(TAG, "Localizacion fuera de visita: " + location.isFinalizado() + ", " );
+    }
+
+    public UltimoCliente getUltimoCliente(){
+        if (pref.getString("ID", null) != null) {
+            String nombre, dir,hora;
+            boolean conc;int idc;
+            float Long, Lat;
+
+            nombre = pref.getString("cliente", null);
+            dir = pref.getString("dir", null);
+            hora = pref.getString("hora", null);
+            conc=pref.getBoolean("fin",false);
+            idc=pref.getInt("idcliente",0);
+            Long=pref.getFloat("ulong",0);
+            Lat=pref.getFloat("ulat",0);
+
+            UltimoCliente ultimoCliente = new UltimoCliente(nombre,idc,dir,hora,conc,Lat,Long);
+            return ultimoCliente;
+        }
+        return null;
     }
 
 

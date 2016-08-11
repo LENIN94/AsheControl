@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.mx.ashe.ashecontrol.ActivityMenu;
 import com.mx.ashe.ashecontrol.R;
 import com.mx.ashe.ashecontrol.helper.checkConexion;
@@ -21,6 +22,7 @@ public class HomeFragment extends Fragment implements MaterialIntroListener {
     ImageView imgRed;
     private static final String MENU_SEARCH_ID_TAG = "menuSearchIdTag";
     private static final String MENU_ABOUT_ID_TAG = "menuAboutIdTag";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Filtra el layout en el fragment
@@ -28,6 +30,8 @@ public class HomeFragment extends Fragment implements MaterialIntroListener {
         //obtenemos en titulo y el actionbar
         ((ActivityMenu) getActivity()).getSupportActionBar().setTitle("ASHE Control");
         checkConexion = new checkConexion(getContext());
+
+
         imgRed = (ImageView) view.findViewById(R.id.notnet);
         if (!checkConexion.estaConectado()) {
             imgRed.setImageResource(R.drawable.notnetwork);

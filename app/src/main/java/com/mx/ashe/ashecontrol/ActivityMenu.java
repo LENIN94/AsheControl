@@ -1,6 +1,6 @@
 package com.mx.ashe.ashecontrol;
 
-import android.content.BroadcastReceiver;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,18 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.mx.ashe.ashecontrol.Fragments.FragmentAcercaDe;
 import com.mx.ashe.ashecontrol.Fragments.FragmentHistorialVisitas;
 import com.mx.ashe.ashecontrol.Fragments.FragmentRegAsistencia;
@@ -36,7 +31,6 @@ import com.mx.ashe.ashecontrol.app.MyApplication;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import co.mobiwise.materialintro.animation.MaterialIntroListener;
-import co.mobiwise.materialintro.prefs.PreferencesManager;
 import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
 import co.mobiwise.materialintro.view.MaterialIntroView;
@@ -51,15 +45,16 @@ public class ActivityMenu extends AppCompatActivity implements MaterialIntroList
 
     ActionBar actionBar;
     private String TAG = ActivityMenu.class.getSimpleName();
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
     private static final String INTRO_CARD = "material_intro";
 
-
+    TextView tvuser;
 
 
 
     @InjectView(R.id.navigation_view)
     NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (MyApplication.getInstance().getPrefManager().getUser() == null) {
@@ -84,9 +79,12 @@ public class ActivityMenu extends AppCompatActivity implements MaterialIntroList
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
+
+       // tvuser.setText(MyApplication.getInstance().getPrefManager().getUser().getNombre());
+
         Menu m = navigationView.getMenu();
 
-        new PreferencesManager(getApplicationContext()).resetAll();
+        //new PreferencesManager(getApplicationContext()).resetAll();
         for (int i = 0; i < m.size(); i++) {
             MenuItem mi = m.getItem(i);
             //for aapplying a font to subMenu ...
@@ -104,15 +102,14 @@ public class ActivityMenu extends AppCompatActivity implements MaterialIntroList
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
-
         // txtusuario.setText(MyApplication.getInstance().getPrefManager().getUser().getNombre());
         setFragment(0);
-        showIntro(toolbar, INTRO_CARD, "Accede al menu tocando\n las barras o deslizando\n hacia la derecha!");
-
+        showIntro(toolbar, INTRO_CARD, "Accede al menu de la aplicación tocando\n el icono en la esquina superior izquierda" +
+                "\no deslizando la pantalla de izquierda a derecha!");
 
     }
 
-    private void showIntro(View view, String usageId, String text){
+    private void showIntro(View view, String usageId, String text) {
         new MaterialIntroView.Builder(ActivityMenu.this)
                 .enableDotAnimation(true)
                 //.enableIcon(false)
@@ -134,22 +131,6 @@ public class ActivityMenu extends AppCompatActivity implements MaterialIntroList
         mi.setTitle(mNewTitle);
     }
 
-    private boolean checkPlayServices() {
-        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
-                        .show();
-            } else {
-                Log.i(TAG, "This device is not supported. Google Play Services not installed!");
-                Toast.makeText(getApplicationContext(), "This device is not supported. Google Play Services not installed!", Toast.LENGTH_LONG).show();
-                finish();
-            }
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -213,8 +194,18 @@ public class ActivityMenu extends AppCompatActivity implements MaterialIntroList
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 //  FragmentRegAsistencia rpt = new FragmentRegAsistencia();
-                startActivity(new Intent(ActivityMenu.this, FragmentRegAsistencia.class));
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+
+                Log.d(TAG, String.valueOf(MyApplication.getInstance().getPrefManager().getUltimoCliente().isFinalizado()));
+                if (MyApplication.getInstance().getPrefManager().getUltimoCliente().isFinalizado()) {
+                    startActivity(new Intent(ActivityMenu.this, FragmentRegAsistencia.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                } else {
+                    startActivity(new Intent(ActivityMenu.this, Activity_ConcluirVisita.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+
+
                 // fragmentTransaction.replace(R.id.fragment, rpt);
                 fragmentTransaction.commit();
                 break;
